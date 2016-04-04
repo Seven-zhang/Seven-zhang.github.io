@@ -149,18 +149,22 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Use the `printf()` function.</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p>Use the <code>printf()</code> function.</p>
-<p>代码块有两种方式，一种用\<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">例如：</span><br></pre></td></tr></table></figure></p>
-<pre><code>public void test(){
-System.out.println(&quot;helloword&quot;);
-}
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">效果如下：</span><br></pre></td></tr></table></figure>
-
-public void test(){
-System.out.println(&quot;helloword&quot;);
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### 代码块高亮</span><br><span class="line">添加一个可选的语言标识符</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">    ```java</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        System.out.println(&quot;helloword&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>效果如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">System.out.println(<span class="string">"helloword"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="table表格"><a href="#table表格" class="headerlink" title="table表格"></a>table表格</h3><p>你可以创建表格，通过符号-分开第一行和其他行，通过|分开各个列<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">one  | two</span><br><span class="line">---- | ---</span><br><span class="line">123  | 456</span><br><span class="line">789  | 000</span><br></pre></td></tr></table></figure></p>
+<p>代码块有两种方式，一种用```包含代码，另一种用四个空格或tab在每行代码前</p>
+<p>例如：</p>
+<blockquote>
+<p>   \<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void test()&#123;</span><br><span class="line">System.out.println(&quot;helloword&quot;);</span><br><span class="line">&#125;</span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>效果如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void test()&#123;</span><br><span class="line">System.out.println(&quot;helloword&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h3><p>添加一个可选的语言标识符</p>
+<p>例如：</p>
+<blockquote>
+<p>   \<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"helloword"</span>)</span><br><span class="line">&#125;</span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>效果如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">System.out.println(<span class="string">"helloword"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="table表格"><a href="#table表格" class="headerlink" title="table表格"></a>table表格</h3><p>你可以创建表格，通过符号-分开第一行和其他行，通过|分开各个列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">one  | two</span><br><span class="line">---- | ---</span><br><span class="line">123  | 456</span><br><span class="line">789  | 000</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <table>
 <thead>
@@ -214,30 +218,36 @@ System.out.println(&quot;helloword&quot;);
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">**当我跑步时** *我谈些什么*</span><br></pre></td></tr></table></figure>
 <p><strong>当我跑步时</strong> <em>我谈些什么</em></p>
 <h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown 支持有序列表和无序列表。</p>
-<p>无序列表使用星号、加号或是减号作为列表标记：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- one</span><br><span class="line">- two</span><br><span class="line">- three</span><br></pre></td></tr></table></figure></p>
+<p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- one</span><br><span class="line">- two</span><br><span class="line">- three</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <ul>
 <li>one</li>
 <li>two</li>
 <li>three</li>
 </ul>
-<p>有序列表则使用数字接着一个英文句点：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.  one</span><br><span class="line">2.  two</span><br><span class="line">3.  three</span><br></pre></td></tr></table></figure></p>
+<p>有序列表则使用数字接着一个英文句点：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.  one</span><br><span class="line">2.  two</span><br><span class="line">3.  three</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <ol>
 <li>one</li>
 <li>two</li>
 <li>three</li>
 </ol>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在文本前面加上 #<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure></p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在文本前面加上 #</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h3 id="链接和图片"><a href="#链接和图片" class="headerlink" title="链接和图片"></a>链接和图片</h3><p>插入链接不需要其他按钮，你只需要使用 <code>[显示文本](链接地址)</code><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[markdown简单语法](http://www.jianshu.com/p/q81RER)</span><br><span class="line">[atom编辑markdown](http://www.jianshu.com/p/f3fd881548ad)</span><br></pre></td></tr></table></figure></p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h3 id="链接和图片"><a href="#链接和图片" class="headerlink" title="链接和图片"></a>链接和图片</h3><p>插入链接不需要其他按钮，你只需要使用 <code>[显示文本](链接地址)</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[markdown简单语法](http://www.jianshu.com/p/q81RER)</span><br><span class="line">[atom编辑markdown](http://www.jianshu.com/p/f3fd881548ad)</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p><a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">markdown简单语法</a></p>
 <p><a href="http://www.jianshu.com/p/f3fd881548ad" target="_blank" rel="external">atom编辑markdown</a></p>
-<p>插入图片不需要其他按钮，你只需要使用 <code>![](图片链接地址)</code><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![](http://ww4.sinaimg.cn/bmiddle/aa397b7fjw1dzplsgpdw5j.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>插入图片不需要其他按钮，你只需要使用 <code>![](图片链接地址)</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![](http://ww4.sinaimg.cn/bmiddle/aa397b7fjw1dzplsgpdw5j.jpg)</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p><img src="http://ww4.sinaimg.cn/bmiddle/aa397b7fjw1dzplsgpdw5j.jpg" alt=""></p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>在你希望引用的文字前面加上 &gt;,&gt; 和文本之间要保留一个字符的空格<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 一盏灯， 一片昏黄； 一简书， 一杯淡茶</span><br></pre></td></tr></table></figure></p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>在你希望引用的文字前面加上 &gt;,&gt; 和文本之间要保留一个字符的空格</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 一盏灯， 一片昏黄； 一简书， 一杯淡茶</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <blockquote>
 <p>一盏灯， 一片昏黄； 一简书， 一杯淡茶</p>
