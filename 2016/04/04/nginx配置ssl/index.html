@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016 | qingyunzhang blog</title>
+  <title>nginx配置ssl | qingyunzhang blog</title>
   <meta name="author" content="qingyunzhang">
   
   <meta name="description" content="java | python">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="nginx配置ssl"/>
   <meta property="og:site_name" content="qingyunzhang blog"/>
 
   
@@ -120,21 +120,72 @@
 		<div class="content">
 			<!-- index -->
 		   
-			  	<h2>归档</h2>
-		  		
-	              <p class="archive-item">
-						<a href="/2016/04/04/nginx配置ssl/" class="archive-title">nginx配置ssl</a><span class="archive post-time">2016-04-04</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="/2016/03/27/2106读书笔记/" class="archive-title">2106读书笔记</a><span class="archive post-time">2016-03-27</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="/2016/01/23/sublime3集成markdown/" class="archive-title">sublime3集成markdown</a><span class="archive post-time">2016-01-23</span>
-					</p>
-			  	
-			  <!-- post -->
+
+			  		<h2>nginx配置ssl</h2>
+					
+					<div>
+						<span class="post-time">2016-04-04 17:02:23</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>#nginx支持https配置ssl</p>
+<p>##1. 生成自签名证书</p>
+<p>需要openssl库，大部分linux默认安装了，如无安装，需手动安装<br>进入创建证书和私钥的目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd /usr/local/nginx/conf/ssl</span><br></pre></td></tr></table></figure>
+<p>创建服务器私钥，需输入密码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># openssl genrsa -des3 -out test.com.key 1024</span><br></pre></td></tr></table></figure>
+<p>生成一个证书请求（csr），会提示输入省份，城市，域名，邮箱信息等，自签字证书可随便填写</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	# openssl req -new -key test.com.key -out test.com.csr</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">除去私钥口令,不然在nginx加载ssl需要输入口令：</span><br></pre></td></tr></table></figure>
+<pre><code># cp test.com.key test.com.key.bak
+# openssl rsa -in test.com.key.bak -out test.com.key
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">最后使用上面的csr和私钥生成crt证书,有效期365天</span><br></pre></td></tr></table></figure>
+<pre><code># openssl x509 -req -days 365 -in test.com.csr -signkey test.com.key -out test.com.crt
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">自签名颁发的SSL证书虽然能够实现加密传输功能，但得不到浏览器的信任。受浏览器信任的[StartSSL](http://www.startssl.com)免费SSL证书</span><br><span class="line"></span><br><span class="line">##2. nginx配置项</span><br><span class="line"></span><br><span class="line">证书和私钥绝对目录配置如*ssl_certificate*和*ssl_certificate_key*</span><br></pre></td></tr></table></figure>
+<pre><code>server {
+    listen       443 ssl;
+    server_name  test.com;
+    ssl on;
+     ssl_certificate      /usr/local/nginx/conf/ssl/test.com.crt;
+    ssl_certificate_key  /usr/local/nginx/conf/ssl/test.com.key;
+    ssl_session_cache    shared:SSL:10m;
+    ssl_session_timeout  5m;
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+    location / { 
+        root   html;
+        index  index.html index.htm;
+    }
+ }
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">启动nginx</span><br></pre></td></tr></table></figure>
+<pre><code>/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过https访问测试通过，https://test.com</span><br><span class="line"></span><br><span class="line">##3. 通过rewrite模块从http跳转到https</span><br><span class="line"></span><br><span class="line">通过http://test.com访问，301跳转到https://test.com</span><br></pre></td></tr></table></figure>
+<pre><code>server {
+    listen 80;
+    server_name test.com;
+    rewrite ^(.*)$ https://$host$1 permanent;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">http和https也可配置在一起</span><br></pre></td></tr></table></figure>
+<pre><code>server {
+    listen              80;
+    listen              443 ssl;
+    server_name         test.com;
+    ssl_certificate     test.com.crt;
+    ssl_certificate_key test.com.key;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##4. nginx中ssl相关配置说明</span><br><span class="line"></span><br><span class="line">下面配置强制用户连接只能引入SSL/TLS那些强壮的协议版本和强大的加密算法，默认的CBC模式的加密容易受到攻击，可优先使用RC4加密</span><br></pre></td></tr></table></figure>
+<pre><code>ssl_protocols  SSLv2 SSLv3 TLSv1;
+ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+ssl_prefer_server_ciphers   on;
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">配置session缓存，1m缓存约可存放4k个会话，默认缓存超时是5分钟，可设置</span><br></pre></td></tr></table></figure>
+<pre><code>ssl_session_cache    shared:SSL:10m;
+ssl_session_timeout  10m;
+keepalive_timeout   70;     #长连接70s超时
+</code></pre><p>```</p>
+
+					</div>
+
+			  <!-- about -->
 			  
 		</div>
 
@@ -143,6 +194,8 @@
 
 		<div class="comment-section">
   
+  
+
 
 </div>
 	</div>
