@@ -151,17 +151,21 @@
 <p>Use the <code>printf()</code> function.</p>
 <p>代码块有两种方式，一种用```包含代码，另一种用四个空格或tab在每行代码前</p>
 <p>例如：</p>
-<blockquote>
-<p>   \<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void test()&#123;</span><br><span class="line">System.out.println(&quot;helloword&quot;);</span><br><span class="line">&#125;</span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>效果如下：</p>
+<pre><code>` ` `
+public void test(){
+System.out.println(&quot;helloword&quot;);
+}
+` ` `
+</code></pre><p>效果如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void test()&#123;</span><br><span class="line">System.out.println(&quot;helloword&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h3><p>添加一个可选的语言标识符</p>
 <p>例如：</p>
-<blockquote>
-<p>   \<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"helloword"</span>)</span><br><span class="line">&#125;</span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>效果如下：</p>
+<pre><code>` ` ` java
+public void test(){
+    System.out.println(&quot;helloword&quot;)
+}
+` ` `
+</code></pre><p>效果如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">System.out.println(<span class="string">"helloword"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="table表格"><a href="#table表格" class="headerlink" title="table表格"></a>table表格</h3><p>你可以创建表格，通过符号-分开第一行和其他行，通过|分开各个列</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">one  | two</span><br><span class="line">---- | ---</span><br><span class="line">123  | 456</span><br><span class="line">789  | 000</span><br></pre></td></tr></table></figure>
