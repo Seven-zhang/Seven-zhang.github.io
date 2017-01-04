@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Maven 生命周期与插件 | qingyunzhang blog</title>
+  <title>maven生命周期.md | qingyunzhang blog</title>
   <meta name="author" content="qingyunzhang">
   
   <meta name="description" content="java | python">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Maven 生命周期与插件"/>
+  <meta property="og:title" content="maven生命周期.md"/>
   <meta property="og:site_name" content="qingyunzhang blog"/>
 
   
@@ -109,15 +109,15 @@
 			<!-- index -->
 		   
 
-			  		<h2>Maven 生命周期与插件</h2>
+			  		<h2>maven生命周期.md</h2>
 					
 					<div>
-						<span class="post-time">2016-10-30 15:35:51</span>
+						<span class="post-time">2016-10-30 13:29:10</span>
 					</div>	
 					
 
 					<div class="article-content">
-						<h3 id="Maven-生命周期与插件"><a href="#Maven-生命周期与插件" class="headerlink" title="Maven 生命周期与插件"></a>Maven 生命周期与插件</h3><p>maven生命周期是抽象的，其实际行为都由插件来完成，maven拥有三套相互独立的生命周期，分别为clean、default、site，其中clean负责清理项目，default负责构建项目，site负责建立项目站点。每个生命周期包含一些阶段（phase），阶段有顺序，后面的阶段依赖于前面的阶段</p>
+						<h3 id="maven生命周期"><a href="#maven生命周期" class="headerlink" title="maven生命周期"></a>maven生命周期</h3><p>maven生命周期是抽象的，其实际行为都由插件来完成，maven拥有三套相互独立的生命周期，分别为clean、default、site，其中clean负责清理项目，default负责构建项目，site负责建立项目站点。每个生命周期包含一些阶段（phase），阶段有顺序，后面的阶段依赖于前面的阶段</p>
 <h4 id="clean生命周期"><a href="#clean生命周期" class="headerlink" title="clean生命周期"></a>clean生命周期</h4><p>clean包含三个phase</p>
 <blockquote>
 <p>pre_clean 执行清理前的准备工作<br>clean 清理上一次构建生成的文件<br>post_clean 执行一些清理后需要完成的工作</p>
@@ -135,17 +135,11 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#mvn clean install</span><br><span class="line">该命令调用clean周期的clean阶段和default周期的install阶段，该命令结合了两个生命周期</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#mvn clean deploy site-deploy</span><br><span class="line">该命令调用clean周期的clean阶段、default周期的deploy阶段和site周期的site-deploy阶段，该命令结合了三个生命周期</span><br></pre></td></tr></table></figure>
 <h4 id="生命周期与插件目标"><a href="#生命周期与插件目标" class="headerlink" title="生命周期与插件目标"></a>生命周期与插件目标</h4><ul>
-<li>maven生命周期的阶段与插件相互绑定，用以完成实际的构建任务。未简化配置maven周期阶段默认内置绑定了很多插件目标，例<code>clean与maven-clean-plugin:clean</code>、<code>compile与maven-compiler-plugin:compile</code>和<code>site与maven-site-plugin:site</code>等，执行命令实际是执行的插件目标任务</li>
-<li>自定义绑定插件目标</li>
+<li>maven生命周期的阶段与插件相互绑定，用以完成实际的构建任务。未简化配置maven周期阶段默认内置绑定了很多插件目标，例<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 自定义绑定插件目标</span><br><span class="line">```shell</span><br><span class="line">&lt;build&gt;  </span><br><span class="line">    &lt;plugins&gt;  </span><br><span class="line">        &lt;plugin&gt;  </span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;2.1.1&lt;/version&gt;  </span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">            #execution元素配置执行id为attach-sources的任务</span><br><span class="line">                &lt;execution&gt;  </span><br><span class="line">                    &lt;id&gt;attach-sources&lt;/id&gt;  </span><br><span class="line">                    &lt;phase&gt;verify&lt;/phase&gt;</span><br><span class="line">                    #phase元素配置将插件绑定到verify生命周期  </span><br><span class="line">                    &lt;goals&gt;  </span><br><span class="line">                        &lt;goal&gt;jar-no-fork&lt;/goal&gt;  </span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                    #goal元素配置执行的插件目标</span><br><span class="line">                &lt;/execution&gt;  </span><br><span class="line">            &lt;/executions&gt;  </span><br><span class="line">        &lt;/plugin&gt;  </span><br><span class="line">    &lt;/plugins&gt;  </span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;  </span><br><span class="line">    &lt;plugins&gt;  </span><br><span class="line">        &lt;plugin&gt;  </span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;  </span><br><span class="line">            &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;  </span><br><span class="line">            &lt;version&gt;2.1.1&lt;/version&gt;  </span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">            #execution元素配置执行id为attach-sources的任务</span><br><span class="line">                &lt;execution&gt;  </span><br><span class="line">                    &lt;id&gt;attach-sources&lt;/id&gt;  </span><br><span class="line">                    &lt;phase&gt;verify&lt;/phase&gt;</span><br><span class="line">                    #phase元素配置将插件绑定到verify生命周期  </span><br><span class="line">                    &lt;goals&gt;  </span><br><span class="line">                        &lt;goal&gt;jar-no-fork&lt;/goal&gt;  </span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                    #goal元素配置执行的插件目标</span><br><span class="line">                &lt;/execution&gt;  </span><br><span class="line">            &lt;/executions&gt;  </span><br><span class="line">        &lt;/plugin&gt;  </span><br><span class="line">    &lt;/plugins&gt;  </span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-<p>然后执行命令<code>mvn verify</code>可执行插件目标，当多个插件目标绑定到同一个阶段时，插件目标的执行顺序由插件声明的先后顺序决定</p>
+<p>然后执行命令<figure class="highlight plain"><figcaption><span>verify```可执行插件目标，当多个插件目标绑定到同一个阶段时，插件目标的执行顺序由插件声明的先后顺序决定</span></figcaption><table><tr><td class="code"><pre><span class="line">- 插件的配置</span><br><span class="line">命令行配置，可由java自带的-D参数设置，例```mvn install -Dmaven.test.skip=true```，该条命令意思是maven-surefire-plugin插件提供了一个maven.test.skip参数，为true时跳过测试。</span><br><span class="line">插件也可全局配置如下</span><br><span class="line">```shell</span><br><span class="line">&lt;build&gt;  </span><br><span class="line">    &lt;plugins&gt;  </span><br><span class="line">        &lt;plugin&gt;  </span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            #如该插件是mavne官方插件，groupId配置可省略，不推荐</span><br><span class="line">            &lt;artifactId&gt;maven-compile-plugin&lt;/artifactId&gt; </span><br><span class="line">            #插件版本最好显示设置，解析到最新版本和之前的版本可能发现变化，导致构建失败</span><br><span class="line">            &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">            #confiuration元素全局配置，基于java1.5版本编译</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">            	&lt;source&gt;1.5&lt;/source&gt;</span><br><span class="line">            	&lt;target&gt;1.5&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;  </span><br><span class="line">    &lt;/plugins&gt;  </span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li><p>插件的配置<br>命令行配置，可由java自带的-D参数设置，例<code>mvn install -Dmaven.test.skip=true</code>，该条命令意思是maven-surefire-plugin插件提供了一个maven.test.skip参数，为true时跳过测试。<br>插件也可全局配置如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;  </span><br><span class="line">    &lt;plugins&gt;  </span><br><span class="line">        &lt;plugin&gt;  </span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            #如该插件是mavne官方插件，groupId配置可省略，不推荐</span><br><span class="line">            &lt;artifactId&gt;maven-compile-plugin&lt;/artifactId&gt; </span><br><span class="line">            #插件版本最好显示设置，解析到最新版本和之前的版本可能发现变化，导致构建失败</span><br><span class="line">            &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">            #confiuration元素全局配置，基于java1.5版本编译</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.5&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.5&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;  </span><br><span class="line">    &lt;/plugins&gt;  </span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解析插件前缀<br>插件前缀与groupId:artifactId一一对应的，这种对应关系存储在仓库元数据中。仓库元数据为artifactId/maven-metadata.xml文件，maven解析插件仓库元数据时，会默认使用org.apache.maven.plugins和org.codehaus.mojo两个groupId，也可自定义配置settings.xml上的groupId上的插件仓库元数据，maven不仅仅会检查org/apache/maven/plugins/artifactId/maven-metadata.xml和org/codehaus/mojo/artifactId/maven-metadata.xml两个官方文件，还会检查用户自定义配置com/your/plugins/maven-metadata.xml</p>
-</li>
+<li>解析插件前缀<br>插件前缀与groupId:artifactId一一对应的，这种对应关系存储在仓库元数据中。仓库元数据为artifactId/maven-metadata.xml文件，maven解析插件仓库元数据时，会默认使用org.apache.maven.plugins和org.codehaus.mojo两个groupId，也可自定义配置settings.xml上的groupId上的插件仓库元数据，maven不仅仅会检查org/apache/maven/plugins/artifactId/maven-metadata.xml和org/codehaus/mojo/artifactId/maven-metadata.xml两个官方文件，还会检查用户自定义配置com/your/plugins/maven-metadata.xml</li>
 </ul>
 
 					</div>
