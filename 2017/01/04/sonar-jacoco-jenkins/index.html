@@ -1,0 +1,195 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sonar+jacoco+jenkins | qingyunzhang blog</title>
+  <meta name="author" content="qingyunzhang">
+  
+  <meta name="description" content="java | python">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="sonar+jacoco+jenkins"/>
+  <meta property="og:site_name" content="qingyunzhang blog"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+     <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">qingyunzhang blog</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>sonar+jacoco+jenkins</h2>
+					
+					<div>
+						<span class="post-time">2017-01-04 15:15:20</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>##sonar安装流程</p>
+<h3 id="1-最新版本sonar需要jdk8，首先需安装jdk8，安装步骤如下："><a href="#1-最新版本sonar需要jdk8，首先需安装jdk8，安装步骤如下：" class="headerlink" title="1. 最新版本sonar需要jdk8，首先需安装jdk8，安装步骤如下："></a>1. 最新版本sonar需要jdk8，首先需安装jdk8，安装步骤如下：</h3><p>a、<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">官网下载</a>jdk8的tar.gz安装压缩包，解压 <code>tar x -C /opt -f jdk-8u66-linux-x64.tar.gz</code><br>b、安装jdk<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_111/bin/java 100</span><br><span class="line">update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_111/bin/java 100</span><br></pre></td></tr></table></figure></p>
+<p>c、配置默认的jdk,for both java and javac<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># update-alternatives --config java</span><br><span class="line">There is 1 program that provides &apos;java&apos;.</span><br><span class="line">		Selection    Command</span><br><span class="line">-----------------------------------------------</span><br><span class="line">*+ 1           /opt/jdk1.8.0_111/bin/java</span><br><span class="line">Enter to keep the current selection[+], or type selection number: 1</span><br><span class="line"></span><br><span class="line"># update-alternatives --config javac</span><br><span class="line">There is 1 program that provides &apos;javac&apos;.</span><br><span class="line">    Selection    Command</span><br><span class="line">-----------------------------------------------</span><br><span class="line">*+ 1           /opt/jdk1.8.0_111/bin/javac</span><br><span class="line">Enter to keep the current selection[+], or type selection number: 1</span><br></pre></td></tr></table></figure></p>
+<p>d、配置环境变量<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/opt/jdk1.8.0_111/</span><br><span class="line">export JRE_HOME=/opt/jdk1.8.0_111/jre/</span><br><span class="line">export PATH=$PATH:/opt/jdk1.8.0_111/bin/:/opt/jdk1.8.0_111/jre/bin/</span><br></pre></td></tr></table></figure></p>
+<p>e、jdk安装验证<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># java -version</span><br><span class="line">java version &quot;1.8.0_111&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-sonar安装部署"><a href="#2-sonar安装部署" class="headerlink" title="2. sonar安装部署"></a>2. sonar安装部署</h3><p>a、<a href="http://www.sonarqube.org/downloads/" target="_blank" rel="external">官网下载</a>sonar最新版本<br>b、解压 <code>tar x -C /opt -f sonarqube-6.1.zip</code><br>c、创建软链接<code>ln -s /opt/sonarqube-6.1/bin/linux-x86-64/sonar.sh /usr/bin/sonar</code>,运行<code>sonar start</code>，默认端口9000，<a href="http://ip:9000" target="_blank" rel="external">http://ip:9000</a> 验证是否正常<br>d、创建sonar数据库和用户名，并分配权限,<font color="red">mysql版本5.6+</font><br>    <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> sonar <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'sonar'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'sonar'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">ON</span> sonar.* <span class="keyword">TO</span> <span class="string">'sonar'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'sonar'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">ON</span> sonar.* <span class="keyword">TO</span> <span class="string">'sonar'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'sonar'</span>;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br></pre></td></tr></table></figure></p>
+<p>e、设置sonar配置文件，配置数据库连接，sonar默认是h2内存数据库，用mysql或oracle需配置<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /opt/sonarqube-6.1/conf/sonar.properties</span><br><span class="line">sonar.jdbc.username:                       sonar</span><br><span class="line">sonar.jdbc.password:                       sonar</span><br><span class="line">sonar.jdbc.url:                            jdbc:mysql://ip:3306/sonar?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true</span><br><span class="line"># Optional properties</span><br><span class="line">sonar.jdbc.driverClassName:                com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure></p>
+<p>f、重启sonar，日志中如下异常<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2016.10.24 13:16:13 WARN  web[][o.a.c.l.WebappClassLoaderBase] The web application [ROOT] appears to have started a thread named [elasticsearch[Silver Samurai][trans</span><br><span class="line">port_client_timer][T#1]&#123;Hashed wheel timer #1&#125;] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:java.lang.Thread.sleep(Native Method)</span><br><span class="line">org.jboss.netty.util.HashedWheelTimer$Worker.waitForNextTick(HashedWheelTimer.java:445)</span><br><span class="line">org.jboss.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:364)</span><br><span class="line">org.jboss.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)</span><br><span class="line">java.lang.Thread.run(Thread.java:745)</span><br></pre></td></tr></table></figure></p>
+<pre><code>解决方法，增加内存
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /opt/sonarqube-6.1/conf/sonar.properties</span><br><span class="line">sonar.web.javaOpts=-Xmx1024m -Xms1024m -XX:+HeapDumpOnOutOfMemoryError</span><br></pre></td></tr></table></figure>
+</code></pre><p>g、安装中文插件<br>    首先admin登录，进入 Administration–&gt;System–&gt;Update Center,搜索Chinese Pack，安装并重启生效<br>h、安装Sonar-Scanner（客户端)，解压后可用<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.8.zip</span><br><span class="line">ln -s /opt/sonar-scanner-2.8/bin/sonar-scanner /usr/bin/sonar-scanner</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-集成maven"><a href="#3-集成maven" class="headerlink" title="3. 集成maven"></a>3. 集成maven</h3><p>a、设置maven的setting配置文件<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;profile&gt;</span><br><span class="line">     &lt;id&gt;sonar&lt;/id&gt;</span><br><span class="line">     &lt;activation&gt;</span><br><span class="line">       &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">     &lt;/activation&gt;</span><br><span class="line">     &lt;properties&gt;</span><br><span class="line">       &lt;sonar.host.url&gt;</span><br><span class="line">           http://ip:9000</span><br><span class="line">       &lt;/sonar.host.url&gt;</span><br><span class="line">     &lt;/properties&gt;</span><br><span class="line">   &lt;/profile&gt;</span><br></pre></td></tr></table></figure></p>
+<p>b、配置maven插件<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">		&lt;plugin&gt;</span><br><span class="line">	        &lt;groupId&gt;org.sonarsource.scanner.maven&lt;/groupId&gt;</span><br><span class="line">	        &lt;artifactId&gt;sonar-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	        &lt;version&gt;3.1.1&lt;/version&gt;</span><br><span class="line">	    &lt;/plugin&gt;</span><br><span class="line">    ```  </span><br><span class="line">c、执行maven命令</span><br><span class="line">	```shell</span><br><span class="line">		mvn clean test sonar:sonar</span><br><span class="line">		#单侧覆盖率传入sonar</span><br><span class="line">		mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test -Dmaven.test.failure.ignore=true sonar:sonar</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-集成jenkins"><a href="#4-集成jenkins" class="headerlink" title="4. 集成jenkins"></a>4. 集成jenkins</h3><p>a、jenkins安装略，jenkins安装sonar插件并重启生效<br>b、设置jenkins的sonar配置–&gt;系统设置SonarQube Server<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name=SonarQube(随意填写)</span><br><span class="line">Server URL=http://ip:9000(sonar平台地址)</span><br><span class="line">Server version=5.3 or higher</span><br></pre></td></tr></table></figure></p>
+<pre><code>系统设置SonarQube Scanner
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name=sonar scanner(随意填写)</span><br><span class="line">SONAR_RUNNER_HOME=/opt/sonar-scanner-2.8/(scanner安装目录)</span><br></pre></td></tr></table></figure>
+</code></pre><p>c、设置job的sonar配置–&gt;Add post-build step–&gt;Execute SonarQube Scanner<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Analysis properties中输入如下内容</span><br><span class="line">sonar.projectKey=testProject(根据实际项目填写)</span><br><span class="line">sonar.projectName=testProject(根据实际项目填写)</span><br><span class="line">sonar.projectVersion=1.0(根据实际项目填写)</span><br><span class="line">sonar.sourceEncoding=UTF-8</span><br><span class="line">sonar.language=java(扫描语言)</span><br><span class="line">sonar.sources=.</span><br><span class="line">sonar.projectBaseDir=.</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-集成jacoco"><a href="#5-集成jacoco" class="headerlink" title="5. 集成jacoco"></a>5. 集成jacoco</h3><p>a、jenkins安装jacoco插件并重启生效<br>b、设置job的jacoco配置–&gt;构建后操作–&gt;Record JaCoCo coverage report<br>c、maven配置jacoco插件<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.jacoco&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jacoco-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.7.7.201606060606&lt;/version&gt;</span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;append&gt;true&lt;/append&gt;</span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">	&lt;executions&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;prepare-agent&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">		&lt;execution&gt;</span><br><span class="line">			&lt;id&gt;post-unit-test&lt;/id&gt;</span><br><span class="line">			&lt;phase&gt;test&lt;/phase&gt;</span><br><span class="line">			&lt;goals&gt;</span><br><span class="line">				&lt;goal&gt;report&lt;/goal&gt;</span><br><span class="line">			&lt;/goals&gt;</span><br><span class="line">		&lt;/execution&gt;</span><br><span class="line">	&lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<pre><code>可通过maven命令测试覆盖率并上传至sonar`mvn clean test sonar:sonar`
+</code></pre><h3 id="6-集成LDAP"><a href="#6-集成LDAP" class="headerlink" title="6. 集成LDAP"></a>6. 集成LDAP</h3><p>a、首先admin登录，进入 Administration–&gt;System–&gt;Update Center,搜索LDAP，安装并重启生效<br>b、设置sonar配置文件,sonar.properties<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># LDAP configuration</span><br><span class="line"># General Configuration</span><br><span class="line">sonar.security.realm=LDAP</span><br><span class="line">sonar.security.savePassword=true</span><br><span class="line">ldap.url=ldap://ldap.com</span><br><span class="line"># User Configuration</span><br><span class="line">ldap.user.baseDn=ou=Users,dc=mycompany,dc=com</span><br><span class="line">ldap.user.request=(&amp;(objectClass=inetOrgPerson)(uid=&#123;login&#125;))</span><br><span class="line">ldap.user.realNameAttribute=cn</span><br><span class="line">ldap.user.emailAttribute=mail</span><br><span class="line"># Group Configuration</span><br><span class="line">ldap.group.baseDn=ou=Groups,dc=sonarsource,dc=com</span><br><span class="line">ldap.group.request=(&amp;(objectClass=posixGroup)(memberUid=&#123;uid&#125;))</span><br></pre></td></tr></table></figure></p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			 
+
+<p>
+  Power by <a href="https://hexo.io">hexo</a> | themed by <a href="https://github.com/wayou/hexo-theme-material">material</a> |
+</p>
+<p>
+  2017 <a href="http://Seven-zhang.github.io"> qingyunzhang </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>
