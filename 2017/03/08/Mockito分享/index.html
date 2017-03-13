@@ -1,0 +1,215 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mockito分享 | qingyunzhang blog</title>
+  <meta name="author" content="qingyunzhang">
+  
+  <meta name="description" content="java | python">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Mockito分享"/>
+  <meta property="og:site_name" content="qingyunzhang blog"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+     <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">qingyunzhang blog</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Mockito分享</h2>
+					
+					<div>
+						<span class="post-time">2017-03-08 11:01:42</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="mockito"><a href="#mockito" class="headerlink" title="mockito"></a>mockito</h2><ul>
+<li>引入pom依赖,最新版本2.7.14</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.14<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Annotations</li>
+</ul>
+<blockquote>
+<p>@Mock注解生成mock类,@Spy注解可调用模拟和真实对象方法,@InjectMocks注解会自动将标记@Mock、@Spy等注解的属性值注入到被测试类中,注意上面注解生效需用@RunWith(MockitoJUnitRunner.class)或者调用MockitoAnnotations.initMocks(this)方法初始化</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Spy</span></span><br><span class="line"><span class="keyword">private</span> AddressService addressService;</span><br><span class="line"><span class="meta">@Mock</span></span><br><span class="line"><span class="keyword">private</span> HostService hostService;</span><br><span class="line"><span class="meta">@InjectMocks</span></span><br><span class="line"><span class="keyword">private</span> CustomerService customerService;</span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    MockitoAnnotations.initMocks(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Stubbing</li>
+</ul>
+<blockquote>
+<p>语法形式:when-method-call-then-return</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Customer customer = <span class="keyword">new</span> Customer(<span class="string">"204"</span>, <span class="string">"John Do"</span>, <span class="string">"221B Bakerstreet"</span>);</span><br><span class="line">when(addressService.getPLZForCustomer(customer)).thenReturn(<span class="number">47891</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>verify</li>
+</ul>
+<blockquote>
+<p>verify是对历史记录作一种回溯校验的处理,关注方法是否调用及调用次数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">verify(addressService).getAddressForCustomer(customer);</span><br><span class="line">verify(addressService,times(<span class="number">3</span>)).getAddressForCustomer(customer);</span><br></pre></td></tr></table></figure>
+<h2 id="powerMock"><a href="#powerMock" class="headerlink" title="powerMock"></a>powerMock</h2><blockquote>
+<p>powermock是对Mockito与EasyMock的扩展,能mock构造方法、私有方法和静态方法,但需要多引用一个扩展jar包,其中对Mockito扩展和Mockito语法很相似,二者任选其中即可</p>
+</blockquote>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p>推荐一个比较好用的断言库,<a href="http://joel-costigliola.github.io/assertj/assertj-core-quick-start.html" target="_blank" rel="external">AssertJ</a></p>
+<ul>
+<li>引入pom依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.assertj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>assertj-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- use 2.6.0 for Java 7 projects --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>静态导入assertj</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.assertj.core.api.Assertions.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.assertj.core.api.Assertions.assertThat;  <span class="comment">// main one</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>assertj用法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// basic assertions</span></span><br><span class="line">assertThat(frodo.getName()).isEqualTo(<span class="string">"Frodo"</span>);</span><br><span class="line">assertThat(frodo).isNotEqualTo(sauron);</span><br><span class="line"><span class="comment">// chaining string specific assertions</span></span><br><span class="line">assertThat(frodo.getName()).startsWith(<span class="string">"Fro"</span>)</span><br><span class="line">                           .endsWith(<span class="string">"do"</span>)</span><br><span class="line">                           .isEqualToIgnoringCase(<span class="string">"frodo"</span>);</span><br><span class="line"><span class="comment">// collection specific assertions (there are plenty more)</span></span><br><span class="line"><span class="comment">// in the examples below fellowshipOfTheRing is a List&lt;TolkienCharacter&gt;</span></span><br><span class="line">assertThat(fellowshipOfTheRing).hasSize(<span class="number">9</span>)</span><br><span class="line">                               .contains(frodo, sam)</span><br><span class="line">                               .doesNotContain(sauron);</span><br></pre></td></tr></table></figure>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			 
+
+<p>
+  Power by <a href="https://hexo.io">hexo</a> | themed by <a href="https://github.com/wayou/hexo-theme-material">material</a> |
+</p>
+<p>
+  2017 <a href="http://Seven-zhang.github.io"> qingyunzhang </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>
